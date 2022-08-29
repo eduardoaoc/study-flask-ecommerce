@@ -1,0 +1,10 @@
+flask
+flask-sqlalchemy
+flask-wtf
+email_validator
+wtforms
+flask-bcrypt
+Flask-Reuploaded
+flask-login
+flask-msearch
+flask_migrate
