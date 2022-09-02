@@ -8,3 +8,4 @@ Flask-Reuploaded
 flask-login
 flask-msearch
 flask_migrate
+flask-uploads
