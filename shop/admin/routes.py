@@ -31,7 +31,7 @@ def category():
         flash(f'Please login first', 'danger')
         return redirect(url_for('login'))'''
     categories=  Category.query.order_by(Category.id.desc()).all()  
-    return render_template('admin/brand.html', title='Brand page', categories=categories)
+    return render_template('admin/brand.html', title='Category page', categories=categories)
 
 
 
