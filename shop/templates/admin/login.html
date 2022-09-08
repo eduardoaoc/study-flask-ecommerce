@@ -9,7 +9,7 @@
             <div class="col-md-4">
                 {% include '_messages.html'%}
 
-        <div class="text-center h1 text-white bg-primary p-2">Login</div>
+        <div class="text-center h1 text-white bg-dark bg-gradient" style=" text-shadow: 2px 3px 3px black;font-family:Verdana; height: 55px; border-radius: 5px; margin-top: 5px;">Login</div>
         <form method='post' enctype="multipart/form-data">
             <div>
                     
@@ -17,7 +17,7 @@
                 {{ render_field(form.password, class='form-control') }}
 
             </div>
-            <p><input type=submit value='Login' class="btn btn-info"></p>
+            <p><input type=submit value='Login' class="btn btn-dark" style="width: 50vh; font-family:Verdana;"></p>
         </form>
     </div>
         <div class="col-md-4"></div>

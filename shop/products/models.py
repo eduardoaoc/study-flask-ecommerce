@@ -2,8 +2,7 @@ from shop import db
 from datetime import datetime
 
 
-class AddProduct(db.Model):
-    
+class AddProduct(db.Model):   
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Numeric(10,2), nullable=False) 
@@ -16,7 +15,7 @@ class AddProduct(db.Model):
     brand_id = db.Column(db.Integer, db.ForeignKey('brand.id'), nullable=False)
     brand = db.relationship('Brand',backref=db.backref('brands', lazy=True))
 
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+    category_id= db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
     category = db.relationship('Category', backref=db.backref('categories', lazy=True))
 
     image_1= db.Column(db.String(150),nullable=False, default='image.jpg')
@@ -26,8 +25,6 @@ class AddProduct(db.Model):
     def __repr__(self):
         return '<AddProduct %r>' % self.title
 
-
-
 class Brand(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(30), nullable=False, unique=True)
@@ -35,13 +32,10 @@ class Brand(db.Model):
     def __repr__(self):
         return '<Brand %r>' % self.title
 
-
-
-
-
 class Category(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(30), nullable=False, unique=True)
+
     def __repr__(self):
         return '<Category %r>' % self.title
 

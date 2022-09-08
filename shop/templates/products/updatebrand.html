@@ -11,20 +11,20 @@
 
             {% if updatebrand %}
 
-            <h1 class="text-center mt-3" style="font-family: Verdana;">Add a brand</h1>
+            <h1 class="text-center h1 text-white bg-dark bg-gradient" style=" text-shadow: 2px 3px 3px black;font-family:Verdana; height: 55px; border-radius: 5px; margin-top: 5px; width: 300px;">Add a brand</h1>
             <form action="" method="POST">
-                <input type="text" name="brand" id="form-control" value="{{updatebrand.name}}" style=" margin-left: 25% ; height: 37px;  margin-top: 35px;">
+                <input type="text" name="brand" id="form-control" value="{{updatebrand.name}}" style=" margin-left: 5% ; height: 37px;  margin-top: 35px;">
                 <input type="submit" name="Update brand" id="btn btn-info mt-2" class="btn btn-outline-success" style="margin-bottom: 5px;">
             </form>
-            <a href="{{url_for('brands')}}" class="btn btn-outline-danger" style="margin-top: 6px; margin-left: 25%;">Cancel</a>
+            <a href="{{url_for('brands')}}" class="btn btn-outline-danger" style="margin-top: 6px; margin-left: 5%;">Cancel</a>
             {% else %}
             
-            <h1 class="text-center mt-3" style="font-family: Verdana;" >Add a category</h1>
+            <h1 class="text-center h1 text-white bg-dark bg-gradient" style=" text-shadow: 2px 3px 3px black;font-family:Verdana; height: 55px; border-radius: 5px; margin-top: 5px; width: 400px;">Add a category</h1>
             <form action="" method="POST">
-                <input type="text" name="category" id="form-control" style=" margin-left: 25% ; height: 37px;  margin-top: 35px;" value="{{updatecat.name}}">
+                <input type="text" name="category" id="form-control" style=" margin-left: 15% ; height: 37px;  margin-top: 35px;" value="{{updatecat.name}}">
                 <input type="submit" name="Update category id="btn btn-info mt-2" class="btn btn-outline-success" style="margin-bottom: 5px;">
             </form>
-            <a href="{{url_for('category')}}" class="btn btn-outline-danger" style="margin-top: 6px; margin-left: 25%;">Cancel</a>
+            <a href="{{url_for('category')}}" class="btn btn-outline-danger" style="margin-top: 6px; margin-left: 15%;">Cancel</a>
 
             {% endif %}
 
