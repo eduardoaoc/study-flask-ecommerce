@@ -15,6 +15,13 @@ def home():
     brands= Brand.query.join(AddProduct, (Brand.id==AddProduct.brand_id)).all()
     return render_template('products/index.html', products=products, brands=brands, categories=categories)
 
+#página individual de um produto
+@app.route('/product/<int:id>')
+def single_page(id):
+    product= AddProduct.query.get_or_404*id
+    return render_template('products/single_page.html', product=product)
+
+
 #página de produtos por marca
 @app.route('/brand/<int:id>')
 def get_brand(id):
