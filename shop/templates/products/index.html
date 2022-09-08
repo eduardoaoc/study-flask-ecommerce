@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-{% include '_messages.html' %}
+    {% include '_messages.html' %}
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-dark">
             <div class="container-fluid">
@@ -67,6 +67,7 @@
                 </div>
             </div>
             {% endfor %}
+            {% endif %}
         </div>
         <!--BOTÕES/NÚMEROS DE PÁGINAS (MARCA)-->
         <div class="row">
@@ -85,7 +86,7 @@
                     ...
                     {% endif %}
                 {% endfor %}
-                {% endif %}
+
                 {% if get_cat.has_next %}
                 <a href="{{url_for('get_brand', id=get_b.id, page=get_cat_prod.next_num)}}" class="btn btn-dark">Next</a>
                 {% endif %}
@@ -94,6 +95,7 @@
         <!-- PRODUTOS POR CATEGORIA -->
         <div class="row">
             {% elif get_cat_prod %}
+
             {% for get_cat in get_cat_prod.items %}
             <div class="col-md-3">
                 <div class="card" style="box-shadow: 0px 3px 3px rgb(152, 152, 152); margin-top: 20px;">
@@ -112,6 +114,8 @@
                 </div>
             </div>
             {% endfor %}
+            {% endif %}
+
         </div>    
         <!--BOTÕES/NÚMEROS DE PÁGINAS (CATEGORIAS)-->
         <div class="row">
@@ -130,7 +134,7 @@
                     ...
                     {% endif %}
                 {% endfor %}
-                {% endif %}
+
                 {% if get_cat_prod.has_next %}
                 <a href="{{url_for('get_category', id=get_cat.id, page=get_cat_prod.next_num)}}" class="btn btn-dark">Next</a>
                 {% endif %}
@@ -175,11 +179,12 @@
                     ...
                     {% endif %}
                 {% endfor %}
-                {% endif %}
+
                 {% if products.has_next %}
                 <a href="{{url_for('home', page=products.next_num)}}" class="btn btn-dark">Next</a>
                 {% endif %}
             </div>
         </div>
     </div>
+
 {% endblock content %}
