@@ -1,50 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="container">
-    <nav class="navbar navbar-expand-lg bg-dark">
-        <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="btn btn-dark" style="margin-left: 5px;" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-dark" style="margin-left: 5px; width: 140px;" href="/">All products</a>
-            </li>
-            <div class="dropdown" style="margin-left: 5px;">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Brands
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                {% for brand in brands%}
-                <a class="dropdown-item" href="{{url_for('get_brand', id=brand.id)}}">{{brand.name}}</a>
-                {% endfor %}
-                </div>
-            </div>
-            <div class="dropdown" style="margin-left: 5px;">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categories
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                {% for category in categories %}
-                <a class="dropdown-item" href="{{url_for('get_category', id=category.id)}}">{{category.name}}</a>
-                {% endfor %}
-                </div>
-            </div>
-            </ul>
-            <form class="d-flex" role="search" style="margin-left: 350px;">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="margin-left: 5px; width: 175px;">
-            <button class="btn btn-outline-success" type="submit" style="margin-left: 5px;">Search</button>
-            </form>
-        </div>
-        </div>
-    </nav>
-</div>
-<!--END NAVBAR-->
-
+{% include 'navbar.html' %}
 <!-- PRODUTOS POR MARCA -->
 <div class="container" style="margin-top: 15px;">
     <div class="row">
@@ -52,23 +8,21 @@
         {% for b in brand.items %}
         <div class="col-md-3 mt-3">
             <div class="card" style="box-shadow: 0px 3px 3px rgb(152, 152, 152); margin-top: 20px; max-height: 400px;">
+                <h4 class="text-center" style="margin-top: 10px; ">{{b.name}}</h4>
                 <img src="{{url_for('static', filename='images/' + b.image_1)}}" alt="" height="180" style="margin-top: 10px;">
                 <div class="card-body"> 
                     {% if b.discount > 0 %}
-                        <p class="text-center" style="text-shadow: 1px 1px 1px grey; color: red; font-weight: bold; margin-top: 5%; margin-bottom: 5px;">-{{b.discount}}%</p>
+                        <p class="text-center" style="text-shadow: 1px 1px 1px grey; color: red; font-weight: bold;  margin-bottom: 5px; font-size: 25px;">-{{b.discount}}%</p>
                     {% endif %}
-                    <h5 class="text-center" style="text-shadow: 1px 1px 1px grey;">{{b.name}}</h5>
-                    <p class="text-center" style="text-shadow: 1px 1px 1px grey;">${{b.price}}</p>
+                    <h5 class="text-center" style="text-shadow: 0px 0px 0px grey; font-size: 150%; margin-bottom: 55px; z-index: -1;">{{b.price}}$</h5>
                 </div>
-                <div class="card-footer">
-                    <a href="{{url_for('single_page', id=b.id)}}"  class="float-left btn btn-sm btn-primary">Details </a>
-                    <form action="#" method="post">
+                <div class="card-footer" style="min-height: 60px;">
+                    <a href="{{url_for('single_page', id=b.id)}}"  class="float-left btn btn-sm btn-primary" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Details</a>
+                    <form action="{{url_for('AddCart')}}" method="post">
                         <input type="hidden" name="product_id" value="{{b.id}}">
-                        <button type="submit"  class="float-right btn btn-sm btn-success" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Add Cart</button>
-                        
+                        <button type="submit"  class="float-right btn btn-sm btn-success" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Add Cart</button>                       
                         <input type="hidden" name="quantity" id="" value="1" min="1" max="{{b.stock}}">
-                        {% set colors = b.colors.split(',') %}
-                        
+                        {% set colors = b.colors.split(',') %}                       
                         <select name="colors" id="" style="visibility: hidden;">
                             {% for color in colors %}
                             {% set col = color.split(':') %}
@@ -81,6 +35,8 @@
         </div>
         {% endfor %}
     </div>
+    <br>
+    <br>
     <!--BOTÕES/NÚMEROS DE PÁGINAS (MARCA)-->
     <div class="row">
         <div class="col text-center">
@@ -107,31 +63,28 @@
         class="btn btn-dark btn-sm mt-4">Next</a>
         {% endif %}
     </div>
-    </div>
+    <br>
     <!-- PRODUTOS POR CATEGORIA -->
     <div class="row">
     {% elif get_cat_prod %}
-
     {% for get_cat in get_cat_prod.items %}
-        <div class="col-md-3 mt-3">
+        <div class="col-md-3 mt-3" style="margin-left: 0%;">
             <div class="card" style="box-shadow: 0px 3px 3px rgb(152, 152, 152); margin-top: 20px; max-height: 400px;">
+                <h4 class="text-center" style="margin-top: 10px;">{{get_cat.name}}</h4>
                 <img src="{{url_for('static', filename='images/' + get_cat.image_1)}}" alt="" height="180" style="margin-top: 10px;">
                 <div class="card-body"> 
                     {% if get_cat.discount > 0 %}
-                        <p class="text-center" style="text-shadow: 1px 1px 1px grey; color: red; font-weight: bold; margin-top: 5%; margin-bottom: 5px;">-{{get_cat.discount}}%</p>
+                        <p class="text-center" style="text-shadow: 1px 1px 1px grey; color: red; font-weight: bold;  margin-bottom: 5px; font-size: 25px;">-{{get_cat.discount}}%</p>
                     {% endif %}
-                    <h5 class="text-center" style="text-shadow: 1px 1px 1px grey;">{{get_cat.name}}</h5>
-                    <p class="text-center" style="text-shadow: 1px 1px 1px grey;">${{get_cat.price}}</p>
+                    <h5 class="text-center" style="text-shadow: 0px 1px 1px grey; font-size: 150%; margin-bottom: 55px; z-index: -1;">{{get_cat.price}}$</h5>
                 </div>          
-                <div class="card-footer">
-                    <a href="{{url_for('single_page', id=get_cat.id)}}"  class="float-left btn btn-sm btn-primary">Details</a>
-                    <form action="#" method="post">
+                <div class="card-footer" style="min-height: 60px;">
+                    <a href="{{url_for('single_page', id=get_cat.id)}}"  class="float-left btn btn-sm btn-primary" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Details</a>
+                    <form action="{{url_for('AddCart')}}" method="post">
                         <input type="hidden" name="product_id" value="{{get_cat.id}}">
-                        <button type="submit"  class="float-right btn btn-sm btn-success" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Add Cart</button>
-                        
+                        <button type="submit"  class="float-right btn btn-sm btn-success" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Add Cart</button>                       
                         <input type="hidden" name="quantity" id="" value="1" min="1" max="{{get_cat.stock}}">
-                        {% set colors = get_cat.colors.split(',') %}
-                        
+                        {% set colors = get_cat.colors.split(',') %}                       
                         <select name="colors" id="" style="visibility: hidden;">
                             {% for color in colors %}
                             {% set col = color.split(':') %}
@@ -148,15 +101,18 @@
     <div class="row">
         <div class="col text-center">
         {% if get_cat_prod.has_prev%}
-        <a href="{{url_for('get_category', id=get_cat.id ,page=get_cat_prod.prev_num)}}" class="btn btn-dark btn-sm mt-4" style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">Previous</a>
+        <a href="{{url_for('get_category', id=get_cat.id ,page=get_cat_prod.prev_num)}}" class="btn btn-dark btn-sm mt-4" 
+        style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">Previous</a>
         {% endif %}
         {% if get_cat_prod.total>8 %}
         {% for page_num in get_cat_prod.iter_pages(left_edge=1,right_edge=2, left_current=1, right_current=2) %}
             {% if page_num %}
                 {% if get_cat_prod.page == page_num %}
-                    <a href="{{url_for('get_category', id=get_cat.id,page=page_num)}}" class="btn btn-dark btn-sm mt-4" style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">{{page_num}}</a>
+                    <a href="{{url_for('get_category', id=get_cat.id,page=page_num)}}" class="btn btn-dark btn-sm mt-4" 
+                    style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">{{page_num}}</a>
                 {% else %}
-                    <a href="{{url_for('get_category', id=get_cat.id, page=page_num)}}" class="btn btn-outline-dark btn-sm mt-4" style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">{{page_num}}</a>
+                    <a href="{{url_for('get_category', id=get_cat.id, page=page_num)}}" class="btn btn-outline-dark btn-sm mt-4" 
+                    style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">{{page_num}}</a>
                 {% endif %}
             {% else %}
             ...
@@ -164,47 +120,42 @@
         {% endfor %}
         {% endif %}
         {% if get_cat_prod.has_next%}
-        <a href="{{url_for('get_category', id=get_cat.id ,page=get_cat_prod.next)}}" class="btn btn-dark btn-sm mt-4" style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">Next</a>
+        <a href="{{url_for('get_category', id=get_cat.id ,page=get_cat_prod.next)}}" class="btn btn-dark btn-sm mt-4" 
+        style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">Next</a>
         {% endif %}
 
     </div>
-
     </div>
     <!-- TODOS PRODUTOS-->
     <div class="row">
     {% else %}
-
         {% for product in products.items %}
         <div class="col-md-3 mt-3">
             <div class="card" style="box-shadow: 0px 3px 3px rgb(152, 152, 152); max-height: 400px;">
+                <h4 class="text-center" style="margin-top: 5px;">{{product.name}}</h4>
                 <img src="{{url_for('static', filename='images/' + product.image_1)}}" height="180" style="margin-top: 10px;">
                 <div class="card-body"> 
                     {% if product.discount > 0 %}
-                        <p class="text-center" style="text-shadow: 1px 1px 1px grey; color: red;  font-weight: bold; margin-top: 5%; margin-bottom: 5px;">-{{product.discount}}%</p>
+                        <p class="text-center" style="text-shadow: 1px 1px 1px grey; color: red; font-weight: bold; margin-bottom: 5px; font-size: 25px;">-{{product.discount}}%</p>
                     {% endif %}
-                    <h5 class="text-center" style="text-shadow: 1px 1px 1px grey;">{{product.name}}</h5>
-                    <p class="text-center" style="text-shadow: 1px 1px 1px grey;">${{product.price}}</p>
+                    <h5 class="text-center" style="text-shadow: 0px 1px 1px rgb(109, 109, 109); font-size: 150%; margin-bottom: 75px; z-index: -1;">{{product.price}}$</h5>
                 </div>              
-                <div class="card-footer">
-                    <a href="{{url_for('single_page', id=product.id)}}" class="float-left btn btn-sm btn-primary">Details</a>
-                    <form action="" method="post">
+                <div class="card-footer" style="min-height: 60px;">
+                    <a href="{{url_for('single_page', id=product.id)}}" class="float-left btn btn-sm btn-primary" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Details</a>
+                    <form action="{{url_for('AddCart')}}" method="post">
                         <input type="hidden" name="product_id" value="{{product.id}}">
-                        <button type="submit" class="float-right btn btn-sm btn-success" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Add Cart</button>
-                        
+                        <button type="submit" class="float-right btn btn-sm btn-success" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Add Cart</button>                       
                         <input type="hidden" name="quantity" id="" value="1" min="1" max="{{product.stock}}">
-                        {% set colors = product.colors.split(',') %}
-                        
-                        <select name="colors" id="" style="visibility: hidden;">
+                        {% set colors = product.colors.split(',') %}                        
+                        <select name="colors" id="colors" style="visibility: hidden;">
                             {% for color in colors %}
                             {% set col = color.split(':') %}
                             <option value="{{col[0]}}">{{col[0]|capitalize}}</option>
                             {% endfor %}
                         </select>
                     </form>
-
                 </div>
             </div>
-
         </div>
         {% endfor %}
     </div>
@@ -212,7 +163,7 @@
     <div class="row">
         <div class="col text-center">
         {% if products.has_prev%}
-        <a href="{{url_for('home', page=products.prev_num)}}" class="btn btn-dark btn-sm mt-4" style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">Previous</a>
+        <a href="{{url_for('home', page=products.prev_num)}}" class="btn btn-dark btn-sm mt-4" style=" box-shadow: 0px 3px 3px rgb(152, 152, 152);">Previous</a>
         {% endif %}
         {% if products.total>8 %}
         {% for page_num in products.iter_pages(left_edge=1,right_edge=2, left_current=1, right_current=2) %}
@@ -230,13 +181,17 @@
         {% if products.has_next%}
         <a href="{{url_for('home', page=products.next)}}" class="btn btn-dark btn-sm mt-4" style="box-shadow: 0px 3px 3px rgb(152, 152, 152);">Next</a>
         {% endif %}
+    </div>
 
-    </div>
-    </div>
-    {% endif %}
-    
+    {% endif %}    
 </div>
-
-
+<!--FOOTER-->
+<footer class="text-centert"  style="margin-top: 20%;">
+    <div class="text-center p-3" style="color: rgb(240, 240, 240); text-shadow: 0px 2px 2px rgb(0, 1, 2);">
+      © 2022 Designed by
+      <a class="text-center" href="http://www.github.com/eduardoaoc" style="color: rgb(240, 240, 240); font-style: bold; 
+      font-size: 20px; text-shadow: 0px 2px 2px rgb(0, 1, 2);">Eduardo A.</a>
+    </div>
+</footer>
 
 {% endblock content %}

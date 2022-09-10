@@ -4,25 +4,25 @@
 
 {% include '_messages.html' %}
     <div class="container">
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg bg-dark" >
             <div class="container-fluid">
-            <a class="btn btn-outline-dark" href="/admin">Admin</a>
+            <a class="btn btn-dark" href="/admin">Admin</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="justify-content: center; align-items: center;">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="btn btn-outline-dark" style="margin-left: 5px;" aria-current="page" href="/admin">Home</a>
+                    <a class="btn btn-dark" style="margin-left: 5px;" aria-current="page" href="/admin">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-dark" style="margin-left: 5px;" href="/brands">Brands</a>
+                    <a class="btn btn-dark" style="margin-left: 5px;" href="/brands">Brands</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-dark" style="margin-left: 5px;" href="/category">Categories</a>
+                    <a class="btn btn-dark" style="margin-left: 5px;" href="/category">Categories</a>
                 </li>
                 <div class="dropdown" style="margin-left: 5px;">
-                    <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Dropdown
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -33,9 +33,9 @@
                   </div>
 
                 </ul>
-                <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="margin-left: 5px;">
-                <button class="btn btn-outline-success" type="submit" style="margin-left: 5px;">Search</button>
+                <form class="d-flex" role="search" style="margin-left: 350px;">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="margin-left: 5px; box-shadow: 0px 2px 2px rgb(170, 170, 170);">
+                <button class="btn btn-outline-success" type="submit" style="margin-left: 5px; box-shadow: 0px 3px 3px rgb(53, 131, 70);">Search</button>
                 </form>
             </div>
             </div>
@@ -58,8 +58,8 @@
                 <tr>
                     <td>{{loop.index}}</td>
                     <td>{{brand.name}}</td>
-                    <td><a href="{{url_for('updatebrand', id=brand.id)}}" class="btn btn-sm btn-info">Edit</a></td>
-                    <td><a href="{{url_for('deletebrand', id=brand.id)}}" class="btn btn-danger btn-sm" method="POST" type="submit">Delete</a></td>
+                    <td><a href="{{url_for('updatebrand', id=brand.id)}}" class="btn btn-sm btn-info" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Edit</a></td>
+                    <td><a href="{{url_for('deletebrand', id=brand.id)}}" class="btn btn-danger btn-sm" method="POST" type="submit" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Delete</a></td>
                 </tr>
 
                 {% endfor %}
@@ -70,8 +70,10 @@
                 <tr>
                     <td>{{loop.index}}</td>
                     <td>{{category.name}}</td>
-                    <td><a href="{{url_for('updatecat', id=category.id)}}" class="btn btn-sm btn-info">Edit</a></td>
-                    <td><a href="{{url_for('deletecat', id=category.id)}}" class="btn btn-sm btn-danger" method="POST" type="submit">Delete</a></td>
+                    <td><a href="{{url_for('updatecat', id=category.id)}}" class="btn btn-sm btn-info" 
+                        style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Edit</a></td>
+                    <td><a href="{{url_for('deletecat', id=category.id)}}" 
+                        class="btn btn-sm btn-danger" method="POST" type="submit" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Delete</a></td>
                 </tr>
                 {% endfor %}
                 {% endif %}

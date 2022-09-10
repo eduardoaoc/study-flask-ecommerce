@@ -18,8 +18,10 @@ def home():
 #página individual de um produto
 @app.route('/product/<int:id>')
 def single_page(id):
-    product= AddProduct.query.get_or_404*id
-    return render_template('products/single_page.html', product=product)
+    categories= Category.query.join(AddProduct, (Category.id==AddProduct.category_id)).all()
+    brands= Brand.query.join(AddProduct, (Brand.id==AddProduct.brand_id)).all()
+    product= AddProduct.query.get_or_404(id)
+    return render_template('products/single_page.html', product=product, brands=brands, categories=categories)
 
 
 #página de produtos por marca
