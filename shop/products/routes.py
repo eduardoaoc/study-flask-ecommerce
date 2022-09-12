@@ -1,9 +1,10 @@
 from flask import redirect, render_template, url_for, flash, request, session, current_app
-from shop import db, app, photos
+import secrets, os 
+
+from shop import db, app, photos, products, search
 from shop.admin.routes import category
 from .models import Brand, Category, AddProduct
 from .forms import Addproducts
-import secrets, os 
 
 
 #página inicial/ todos produtos
@@ -14,6 +15,16 @@ def home():
     categories= Category.query.join(AddProduct, (Category.id==AddProduct.category_id)).all()
     brands= Brand.query.join(AddProduct, (Brand.id==AddProduct.brand_id)).all()
     return render_template('products/index.html', products=products, brands=brands, categories=categories)
+
+#pequisa de produtos, etc.
+@app.route('/result')
+def result():
+    categories= Category.query.join(AddProduct, (Category.id==AddProduct.category_id)).all()
+    brands= Brand.query.join(AddProduct, (Brand.id==AddProduct.brand_id)).all()
+    searchword= request.args.get('q')
+    products= AddProduct.query.msearch(searchword, fields=['name', 'desc'], limit=6)
+    return render_template('products/result.html', products=products, brands=brands, categories=categories)
+
 
 #página individual de um produto
 @app.route('/product/<int:id>')
@@ -48,7 +59,8 @@ def get_category(id):
 @app.route('/addbrand', methods=['GET', 'POST'])
 def addbrand():
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))'''
     if request.method== 'POST':
         getbrand= request.form.get('brand')
         brand= Brand(name=getbrand)
@@ -62,7 +74,9 @@ def addbrand():
 @app.route('/updatebrand/<int:id>', methods=['GET', 'POST'])
 def updatebrand(id):
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))
+        '''
     updatebrand= Brand.query.get_or_404(id) 
     brand= request.form.get('brand')
 
@@ -77,7 +91,9 @@ def updatebrand(id):
 @app.route('/deletebrand/<int:id>')
 def deletebrand(id):
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))
+        '''
     brand= Brand.query.filter_by(id=id).first()
     try:
         db.session.delete(brand)
@@ -91,7 +107,9 @@ def deletebrand(id):
 @app.route('/addcat', methods=['GET', 'POST'])
 def addcat():
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))
+        '''
     if request.method== 'POST':
         getcat= request.form.get('category')
         cat= Category(name=getcat)
@@ -105,7 +123,9 @@ def addcat():
 @app.route('/updatecat/<int:id>', methods=['GET', 'POST'])
 def updatecat(id):
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))
+        '''
     updatecat= Category.query.get_or_404(id)
     category= request.form.get('category')
 
@@ -120,7 +140,9 @@ def updatecat(id):
 @app.route('/deletecat/<int:id>')
 def deletecat(id):
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))
+        '''
     category= Category.query.filter_by(id=id).first()
     try:
         db.session.delete(category)
@@ -134,7 +156,9 @@ def deletecat(id):
 @app.route('/addproduct', methods=['POST', 'GET'])
 def addproduct():
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))
+        '''
     brands= Brand.query.all()
     categories= Category.query.all()
     form= Addproducts(request.form)
@@ -165,7 +189,9 @@ def addproduct():
 @app.route('/updateproduct/<int:id>', methods=['GET', 'POST'])
 def updateproduct(id):
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))
+        '''
     brands= Brand.query.all()
     categories= Category.query.all()
     product= AddProduct.query.get_or_404(id)
@@ -218,7 +244,9 @@ def updateproduct(id):
 @app.route('/deleteproduct/<int:id>')
 def deleteproduct(id):
     '''if 'email' not in session:
-        flash(f'Please login first', 'danger')'''
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))
+        '''
     product= AddProduct.query.filter_by(id=id).first()
     try:
         os.unlink(os.path.join(current_app.root_path, 'static/images/' + product.image_1))  

@@ -4,20 +4,23 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
+        {% include '_messages.html' %}
         <table class="table table-sm table-hover">
             <thead>
                 <th>ID</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Color</th>
                 <th>Price</th>
                 <th>Qnt</th>
-                <th>%</th>
+                <th>-%</th>
                 <th>Discount</th>
                 <th>Subtotal</th>
                 <th>Update</th>
                 <th>Delete</th>
             </thead>
             <tbody>
+        
                 {% for key, product in session['Shoppingcart'].items() %}
 
                 {% set discount =  "%0.2f" | format((product.discount/100) * product.price|float) %}
@@ -25,11 +28,27 @@
                 <tr>
 
                     <td>{{loop.index}}</td>                  
-                    <td><img src="{{url_for('static')}}" alt=""></td>
-                    <td><a href="/">{{product.name}}</a></td>                  
-                    <td>{{product.color}}</td>
-                    <td>${{product.price}}</td>
-                    <td>{{product.quantity}}</td>
+                    <td>
+                        <img src="{{url_for('static', filename='images/' + product.image)}}" alt="{{product.name}}" width="50" height="45">
+                    </td>
+                    <td><a href="/" style="color: black;">{{product.name}}</a></td>   
+                <form action="{{url_for('updatecart', code=key)}}" method="post">          
+                    <td>
+                        {% set colors = product.colors.split(',') %}
+                        <label for="colors"></label>
+                        <select name="color" id="color">
+                            <option value="{{product.color}}" style="display: none;">{{product.color | capitalize}}</option>
+                            {% for color in colors %}
+                            {% set col = color.split(':') %}
+                            <option value="{{col[0]}}">{{col[0] | capitalize}}</option>
+                            {% endfor %}
+                        </select>
+
+                    </td>
+                    <td>${{"%.2f"|format(product.price)}}</td>
+                    <td>
+                        <input type="number" name='quantity' min='1' max='10' value="{{product.quantity}}">
+                    </td>
 
                     {% if product.discount > 0 %}
 
@@ -43,8 +62,11 @@
                     {% set subtotal = product.quantity|int * product.price|float %}
 
                     <td>${{"%.2f"|format((subtotal|float) - discount|float)}}</td>
-                    <td><a href="#" class="btn btn-sm btn-info" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Update</a></td>
-                    <td><a href="#" class="btn btn-sm btn-danger" 
+                    <td>
+                        <button type='submit' class="btn btn-sm btn-info" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Update</button>
+                    </td>
+                </form>     
+                    <td><a href="{{url_for('deleteitem', id=key)}}" class="btn btn-sm btn-danger" 
                     method="POST" type="submit" class="btn btn-sm btn-info" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Remove</a></td>
                 </tr>
                 {% endfor %}
@@ -52,13 +74,17 @@
         </table>
         <table class="table table-sm">
             <tr>
-                <td><a href="/" class="btn btn-sm btn-outline-dark" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Continue shopping</a></td>
+                <td><a href="/" class="btn btn-sm btn-dark" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Continue shopping</a></td>
                 <td width="30%"></td>
-                <td colspan="3"><h5 style="margin-left: 20%; color: red; text-shadow: 0px 1px 2px rgb(110, 110, 110);">-${{tax}} OFF</h5></td>
-                <td colspan="3"><h5 style="color: rgb(3, 117, 3); margin-right: 130px; text-shadow: 0px 1px 2px rgb(110, 110, 110);">Total: ${{total}}</h5></td>
+                <td colspan="3"><h6 style="margin-left: 60%; min-width:90%; margin-top: 5px; 
+                color: red; text-shadow: 0px 1px 2px rgb(110, 110, 110);">[Taxa: ${{tax}}]</h6></td>
+                <td colspan="3"><h4 style="color: rgb(3, 117, 3); margin-left: 20%;
+                 text-shadow: 0px 1px 2px rgb(110, 110, 110);">Total: ${{total}}</h4></td>
+                <td> <a href="{{url_for('clearcart')}}" class="btn btn-danger btn-sm float-rigth"
+                     style="margin-left: 20%; box-shadow: 0px 3px 3px rgb(107, 107, 107);">Clear Cart</a></td>
             </tr>
         </table>
-
+        
     </div>
    </div>
 </div>

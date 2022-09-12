@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_uploads import IMAGES, UploadSet, configure_uploads
 import os
+from flask_msearch import Search
 
 basedir= os.path.abspath(os.path.dirname(__file__))
 
@@ -17,13 +18,12 @@ photos= UploadSet('photos',IMAGES)
 configure_uploads(app, photos)
 
 db= SQLAlchemy(app)
+#criptografia de senhas
 bcrypt= Bcrypt(app)
+#pesquisa/busca
+search= Search()
+search.init_app(app)
 
 from shop.admin import routes 
 from shop.products import routes
 from shop.carts import carts
-
-
-
-
-
