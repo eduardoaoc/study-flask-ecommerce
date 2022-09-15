@@ -19,10 +19,10 @@ def home():
 #pequisa de produtos, etc.
 @app.route('/result')
 def result():
-    categories= Category.query.join(AddProduct, (Category.id==AddProduct.category_id)).all()
-    brands= Brand.query.join(AddProduct, (Brand.id==AddProduct.brand_id)).all()
     searchword= request.args.get('q')
     products= AddProduct.query.msearch(searchword, fields=['name', 'desc'], limit=6)
+    categories= Category.query.join(AddProduct, (Category.id==AddProduct.category_id)).all()
+    brands= Brand.query.join(AddProduct, (Brand.id==AddProduct.brand_id)).all()
     return render_template('products/result.html', products=products, brands=brands, categories=categories)
 
 
@@ -33,7 +33,6 @@ def single_page(id):
     brands= Brand.query.join(AddProduct, (Brand.id==AddProduct.brand_id)).all()
     product= AddProduct.query.get_or_404(id)
     return render_template('products/single_page.html', product=product, brands=brands, categories=categories)
-
 
 #página de produtos por marca
 @app.route('/brand/<int:id>')
