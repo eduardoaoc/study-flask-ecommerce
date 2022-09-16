@@ -31,7 +31,7 @@ nos preços, entre outras funções como criar uma categoria nova  e também adi
 ## Carrinho com produtos. (/carts)
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/cart.JPG)
 ## Orçamento. (/orders/order=id)
-![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/oders.JPG)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/orders.JPG)
 # Área do admin!
 ## Login admin. (/login)
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/login-admin.JPG)
