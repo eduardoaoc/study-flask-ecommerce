@@ -44,7 +44,7 @@ nos preços, entre outras funções como criar uma categoria nova  e também adi
 ## Página marcas. (/brands)
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-filtro-marca.JPG)
 ## Adicionar/atualizar novo produto. (/addproduct) (/updateproduct/product=id)
-![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/adc-product.JPG)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/adc-produto.JPG)
 ## Adicionar nova marca. (/addbrand)
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/adc-marca.JPG)
 ## Adicionar nova categoria. (/addcat)
