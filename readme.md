@@ -72,8 +72,6 @@ nos preços, entre outras funções como criar uma categoria nova  e também adi
 # Clone this repository.
 git clone https://github.com/eduardoaoc/study-flask-ecommerce
 
-# Enter the folder.
-
 # Execute the file.
 app.py
 ```
