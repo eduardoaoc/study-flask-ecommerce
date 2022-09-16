@@ -8,20 +8,50 @@ fazer o login no site e comprar o produto que quiser. Além da parte do administ
 no qual fica com o dono da loja, para que possa assim adicionar produtos, fazer algumas alterações
 nos preços, entre outras funções como criar uma categoria nova  e também adicionar uma nova marca.
 
-## Barra de navegação
+## Barra de navegação.
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/homepage-navbat.JPG) 
 ## Barra de navegação pós login.
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/if-client-login.JPG) 
-## Página Inicial 
+## Página Inicial. (/)
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/homepage.JPG) 
-## 
+## Página de login do cliente. (/customer/login)
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/login-cliente.JPG)
-## 
-![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/homepage.JPG)
-## 
-![Layout App]()
-## 
-![Layout App]()
+## Página de cadastro cliente. (/customer/register)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/area-cadastro-cliente.JPG)
+## Página de cada produto. (/product/product=id)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/product-page.JPG)
+## Filtro por categoria. (/categories/category=id)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/filtro-por-categoria.JPG)
+## Filtro por marca. (/brand/barnd=id)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/filtro-por-marca.JPG)
+## Sistema de busca. (/result?q= )
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/sistema-de-busca.JPG)
+## Carrinho de compra vazio. (/carts)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/cart-clear.JPG)
+## Carrinho com produtos. (/carts)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/cart.JPG)
+## Orçamento. (/orders/order=id)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/oders.JPG)
+# Área do admin!
+## Login admin. (/login)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/login-admin.JPG)
+## Cadastro admin. (/register)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/register-admin.JPG)
+## Página Inicial admin. (/admin)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-todos-produtos.JPG)
+## Página categorias. (/category)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-categorias.JPG)
+## Página marcas. (/brands)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-filtro-por-marca.JPG)
+## Página marcas. (/brands)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-filtro-por-marca.JPG)
+## Adicionar/atualizar novo produto. (/addproduct) (/updateproduct/product=id)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-filtro-por-marca.JPG)
+## Adicionar nova marca. (/addbrand)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/add-marca.JPG)
+## Adicionar nova categoria. (/addcat)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/add-categoria.JPG)
+
 
 
 # Technology used
