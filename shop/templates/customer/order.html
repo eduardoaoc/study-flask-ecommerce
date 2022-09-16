@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+        {% include '_messages.html' %}
+            Invoice: {{orders.invoice}}
+            <br>
+            Status: {{orders.status}}
+            <br>
+            Customer name: {{customer.name}}
+            <br>
+            Customer email: {{customer.email}}
+            <br>
+            Customer contact: {{customer.contact}}
+            <br>
+            <br>
+        <table class="table table-sm table-hover">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>Qnt</th>
+                <th>-%</th>
+                <th>Discount</th>
+                <th>Subtotal</th>
+
+            </thead>
+            <tbody>
+        
+                {% for key, product in orders.orders.items() %}
+
+                {% set discount =  "%0.2f" | format((product.discount/100) * product.price|float) %}
+
+                <tr>
+
+                    <td>{{loop.index}}</td>                  
+                    <td><a href="/" style="color: black;">{{product.name}}</a></td>   
+                <form action="{{url_for('updatecart', code=key)}}" method="post">   
+                    <td>
+                        {{ product.color|capitalize }}
+                    </td>
+                    <td>${{"%.2f"|format(product.price)}}</td>
+                    <td>
+                        <input type="number" name='quantity' min='1' max='10' value="{{product.quantity}}">
+                    </td>
+
+                    {% if product.discount > 0 %}
+
+                    <td>-{{product.discount}}%</td>
+                    <td>-${{discount}}</td>     
+
+                    {% else %}       
+                    <td></td>
+                    {% endif %}     
+
+                    {% set subtotal = product.quantity|int * product.price|float %}
+
+                    <td>${{"%0.2f"|format((subtotal|float) - discount|float)}}</td>
+                   
+                </form>     
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-sm">
+            <tr>
+                <td><a href="{{url_for('get_order')}}" class="btn btn-sm btn-success" style="box-shadow: 0px 3px 3px rgb(107, 107, 107);">Check out</a></td>
+                <td width="30%"></td>
+                <td colspan="3"><h6 style="margin-left: 60%; min-width:90%; margin-top: 5px; 
+                color: red; text-shadow: 0px 1px 2px rgb(110, 110, 110);">[Taxa: ${{tax}}]</h6></td>
+                <td colspan="3"><h4 style="color: rgb(3, 117, 3); margin-left: 20%;
+                 text-shadow: 0px 1px 2px rgb(110, 110, 110);">Total: ${{grandTotal}}</h4></td>
+                <td> <a href="#" class="btn btn-danger btn-sm float-rigth"
+                    style="margin-left: 20%; box-shadow: 0px 3px 3px rgb(107, 107, 107);">Get PDF</a></td>
+            </tr>
+        </table>
+        
+    </div>
+   </div>
+</div>
+<!--FOOTER-->
+<footer class="text-centert" style="margin-top: 20%;">
+    <div class="text-center p-3" style="color: rgb(240, 240, 240); text-shadow: 0px 2px 2px rgb(0, 1, 2);">
+      © 2022 Designed by
+      <a class="text-center" href="http://www.github.com/eduardoaoc" style="color: rgb(240, 240, 240); font-style: bold; 
+      font-size: 20px; text-shadow: 0px 2px 2px rgb(0, 1, 2);">Eduardo A.</a>
+    </div>
+</footer>
+{% endblock content %}

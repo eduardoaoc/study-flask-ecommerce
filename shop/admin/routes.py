@@ -8,25 +8,25 @@ from shop.products.models import AddProduct, Brand, Category
 
 @app.route('/admin')
 def admin():
-    '''if 'email' not in session:
+    if 'email' not in session:
         flash(f'Please login first', 'danger')
-        return redirect(url_for('login'))'''
+        return redirect(url_for('login'))
     products = AddProduct.query.all()
     return render_template('admin/index.html', title='Admin Page', products=products)
 
 @app.route('/brands')
 def brands():
-    '''if 'email' not in session:
+    if 'email' not in session:
         flash(f'Please login first', 'danger')
-        return redirect(url_for('login'))'''
+        return redirect(url_for('login'))
     brands=  Brand.query.order_by(Brand.id.desc()).all()  
     return render_template('admin/brand.html', title='Brand page', brands=brands)
 
 @app.route('/category')
 def category():
-    '''if 'email' not in session:
+    if 'email' not in session:
         flash(f'Please login first', 'danger')
-        return redirect(url_for('login'))'''
+        return redirect(url_for('login'))
     categories=  Category.query.order_by(Category.id.desc()).all()  
     return render_template('admin/brand.html', title='Category page', categories=categories)
 

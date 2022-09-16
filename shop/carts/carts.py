@@ -47,10 +47,10 @@ def AddCart():
 #página do carrinho de compras 
 @app.route('/carts')
 def getCart():
+    if 'Shoppingcart' not in session or len(session['Shoppingcart']) <=0:
+         return render_template('products/cartclear.html')
     categories= Category.query.join(AddProduct, (Category.id==AddProduct.category_id)).all()
     brands= Brand.query.join(AddProduct, (Brand.id==AddProduct.brand_id)).all()
-    if 'Shoppingcart' not in session and len(session['Shoppingcart']) <= 0:
-        return redirect(url_for('home'))
     subtotal=0
     total=2    
     for key , product in session['Shoppingcart'].items():
@@ -59,24 +59,20 @@ def getCart():
         subtotal -= discount
         tax= ("%.2f" % (.06 * float(subtotal)))
         total= float("%.2f" % (1.06 * subtotal))
-    return render_template('products/carts.html', tax=tax, total=total, categories=categories, brands=brands)    
+    return render_template('products/carts.html', categories=categories, brands=brands, total=total, tax=tax)    
 
 
 #carrinho vázio
-@app.route('/empty')
+@app.route('/cartclear')
 def empty_cart():
-    try:
-        session.clear()
-        return redirect(url_for('home'))
-    except Exception as e:
-        print(e)        
-
+    return render_template('products/cartclear.html')
+  
 
 #atualiza os produtos do carrinho
 @app.route('/updatecart/<int:code>', methods=['POST'])
 def updatecart(code):
-    if 'Shoppingcart' not in session and len(session['Shoppingcart']) <=0:
-        return redirect(url_for('home'))
+    if 'Shoppingcart' not in session and len(session['Shoppingcart']) <= 0:
+        return redirect(url_for('cartclear'))
     if request.method == 'POST':
         quantity= request.form.get('quantity')
         color= request.form.get('color')
@@ -97,7 +93,7 @@ def updatecart(code):
 @app.route('/deleteitem/<int:id>')
 def deleteitem(id):
     if 'Shoppingcart' not in session and len(session['Shoppingcart']) <= 0:
-        return redirect(url_for('home'))
+        return redirect(url_for('cartclear'))
     try:
         session.modified= True
         for key, item in session['Shoppingcart'].items():
@@ -114,6 +110,6 @@ def deleteitem(id):
 def clearcart():
     try:
         session.pop('Shoppingcart', None)
-        return redirect(url_for('home'))
+        return render_template('products/cartclear.html')
     except Exception as e:
         print(e)    

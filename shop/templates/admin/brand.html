@@ -33,9 +33,11 @@
                     </div>
                 </div>
                 </ul>
-                <form class="d-flex" role="search" style="margin-left: 250px;">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="margin-left: 5px; width: 175px; box-shadow: 0px 2px 2px rgb(170, 170, 170);">
-                <button class="btn btn-outline-success" type="submit" style="margin-left: 5px; box-shadow: 0px 3px 3px rgb(53, 131, 70);">Search</button>
+                <form class="d-flex" role="search" style="margin-left: 190px;" action="{{url_for('result')}}">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="q" 
+                style=" border-color: #212529; background-color: #212529; margin-left: 5px; width: 175px; 
+                box-shadow: 0px 1px 1px rgb(189, 173, 173); color: #ffff;">
+                <button class="btn btn-outline-success" type="submit" style="margin-left: 5px;  box-shadow:0px 1px 1px rgb(53, 131, 70);">Search</button>
                 </form>
                 <a href="{{url_for('logout')}}" class="btn btn-dark" style="color: rgb(206, 5, 5); margin-left: 40px;" title="Logout">
                     <i class="bi bi-person-x-fill"></i>
