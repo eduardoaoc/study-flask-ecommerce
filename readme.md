@@ -42,15 +42,13 @@ nos preços, entre outras funções como criar uma categoria nova  e também adi
 ## Página categorias. (/category)
 ![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-categorias.JPG)
 ## Página marcas. (/brands)
-![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-filtro-por-marca.JPG)
-## Página marcas. (/brands)
-![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-filtro-por-marca.JPG)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-filtro-marca.JPG)
 ## Adicionar/atualizar novo produto. (/addproduct) (/updateproduct/product=id)
-![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/admin-filtro-por-marca.JPG)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/adc-product.JPG)
 ## Adicionar nova marca. (/addbrand)
-![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/add-marca.JPG)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/adc-marca.JPG)
 ## Adicionar nova categoria. (/addcat)
-![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/add-categoria.JPG)
+![Layout App](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/assets/adc-categoria.JPG)
 
 
 
