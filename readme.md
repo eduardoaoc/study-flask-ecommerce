@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/eduardoaoc/study-flask-ecommerce/blob/main/LICENSE) 
 
-# About the Project
+# Sobre o projeto
 Nesse projeto é um ecommercer totalmente funcional. Nele é possível o cliente fazer cadastro,
 fazer o login no site e comprar o produto que quiser. Além da parte do administrador do site,
 no qual fica com o dono da loja, para que possa assim adicionar produtos, fazer algumas alterações
